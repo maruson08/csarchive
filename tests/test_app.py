@@ -1,8 +1,10 @@
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from app import add_entry, load_entries, render_page
+from app import add_entry, get_server_address, load_entries, render_page
 
 
 class ArchiveAppTests(unittest.TestCase):
@@ -43,6 +45,10 @@ class ArchiveAppTests(unittest.TestCase):
         self.assertIn("CS Archive", html)
         self.assertIn("week-1-001", html)
         self.assertIn("https://example.com", html)
+
+    def test_get_server_address_uses_environment_values(self):
+        with patch.dict(os.environ, {"PORT": "9000", "HOST": "0.0.0.0"}, clear=True):
+            self.assertEqual(get_server_address(), ("0.0.0.0", 9000))
 
 
 if __name__ == "__main__":

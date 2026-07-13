@@ -5,6 +5,8 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
+import os
+
 DATA_FILE = Path(__file__).resolve().parent / "data" / "entries.json"
 
 
@@ -100,6 +102,12 @@ def render_page(entries: list[dict[str, Any]], message: str = "") -> str:
 """
 
 
+def get_server_address() -> tuple[str, int]:
+    host = os.environ.get("HOST", "127.0.0.1")
+    port = int(os.environ.get("PORT", "8000"))
+    return host, port
+
+
 def create_app() -> Any:
     from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -137,7 +145,13 @@ def create_app() -> Any:
     return ThreadingHTTPServer(("127.0.0.1", 8000), ArchiveHandler)
 
 
-if __name__ == "__main__":
+def main() -> None:
     server = create_app()
-    print("Serving at http://127.0.0.1:8000")
+    host, port = get_server_address()
+    print(f"Serving at http://{host}:{port}")
+    server.server_address = (host, port)
     server.serve_forever()
+
+
+if __name__ == "__main__":
+    main()

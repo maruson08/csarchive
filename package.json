@@ -1,0 +1,9 @@
+{
+  "name": "csarchive",
+  "version": "1.0.0",
+  "description": "CS 수업 Colab 아카이브 웹앱",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

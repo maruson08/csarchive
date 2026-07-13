@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Archive</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <h1>CS Archive</h1>
+    <p>수업 중 작성한 Colab 노트북과 회고를 한곳에 모아두는 아카이브입니다.</p>
+
+    <form id="entry-form">
+      <label>주차</label>
+      <input name="week" required />
+
+      <label>Colab 링크</label>
+      <input name="colab_link" required />
+
+      <label>느낀점</label>
+      <textarea name="reflection" rows="4" required></textarea>
+
+      <label>개선할 점</label>
+      <textarea name="improvement" rows="4" required></textarea>
+
+      <button type="submit">저장하기</button>
+    </form>
+
+    <section id="entries"></section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
